@@ -6,6 +6,8 @@
     "lat": 9.9857,
     "lng": 76.2947,
     "open": true,
+    "rating": 4.3,
+    "reviewCount": 128,
     "products": [
       { "id": "p1", "name": "Rice 5kg", "price": 320 },
       { "id": "p2", "name": "Toor Dal 1kg", "price": 140 },
@@ -19,6 +21,8 @@
     "lat": 9.9901,
     "lng": 76.2989,
     "open": true,
+    "rating": 4.6,
+    "reviewCount": 89,
     "products": [
       { "id": "p4", "name": "Paracetamol Strip", "price": 25 },
       { "id": "p5", "name": "Hand Sanitizer 200ml", "price": 90 }
@@ -31,6 +35,8 @@
     "lat": 9.9312,
     "lng": 76.2673,
     "open": true,
+    "rating": 4.5,
+    "reviewCount": 214,
     "products": [
       { "id": "p6", "name": "Brown Bread", "price": 55 },
       { "id": "p7", "name": "Chocolate Cake 500g", "price": 350 }
@@ -43,6 +49,8 @@
     "lat": 10.0261,
     "lng": 76.3086,
     "open": false,
+    "rating": 4.0,
+    "reviewCount": 47,
     "products": [
       { "id": "p8", "name": "Wheat Flour 5kg", "price": 210 }
     ]

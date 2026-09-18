@@ -47,6 +47,57 @@ a {
   margin: 0;
 }
 
+.search-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.search-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.category-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.category-filter {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.category-filter.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: white;
+  font-weight: 600;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 18px 0 10px;
+}
+
+.rating-pill {
+  color: #15803d;
+  font-weight: 700;
+}
+
 .radius-toggle {
   display: flex;
   gap: 8px;
