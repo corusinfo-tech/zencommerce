@@ -54,19 +54,19 @@ a {
 }
 
 .radius-toggle button {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--card);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .radius-toggle button.active {
   border-color: var(--accent);
-  background: #f0fdf4;
-  color: var(--accent-dark);
+  background: var(--accent);
+  color: white;
   font-weight: 600;
 }
 
@@ -79,16 +79,69 @@ a {
 .shop-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  transition: opacity 0.15s;
+}
+
+.shop-card.is-closed {
+  opacity: 0.6;
+}
+
+.shop-cover {
+  position: relative;
+  height: 84px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 14px;
+}
+
+.shop-cover-name {
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.eta-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.closed-ribbon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(23, 23, 23, 0.85);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.shop-card-body {
+  padding: 12px 14px;
 }
 
 .shop-card-head {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .shop-name {
@@ -99,6 +152,19 @@ a {
 .shop-meta {
   font-size: 13px;
   color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.category-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
 }
 
 .closed-badge {
@@ -111,14 +177,27 @@ a {
 
 .product-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 8px 0;
   border-top: 1px solid var(--border);
 }
 
 .product-row:first-of-type {
   border-top: none;
+}
+
+.product-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .product-name {
@@ -202,4 +281,36 @@ a {
   text-align: center;
   color: var(--muted);
   padding: 40px 0;
+}
+
+/* Category-based cover placeholders — swap for real shop photos later */
+.cover-grocery {
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+}
+.cover-pharmacy {
+  background: linear-gradient(135deg, #0891b2, #67e8f9);
+}
+.cover-bakery {
+  background: linear-gradient(135deg, #d97706, #fbbf24);
+}
+.cover-default {
+  background: linear-gradient(135deg, #6366f1, #a5b4fc);
+}
+
+.cart-shop-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-shop-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
 }

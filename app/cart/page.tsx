@@ -43,15 +43,23 @@ export default function CartPage() {
           const shopItems = items.filter((i) => i.shopId === shopId);
           return (
             <div className="shop-card" key={shopId}>
-              <div className="shop-name">{shop.name}</div>
-              {shopItems.map((item) => (
-                <div className="product-row" key={item.productId}>
-                  <div>
-                    <div className="product-name">{item.name}</div>
-                    <div className="product-price">
-                      ₹{item.price} × {item.qty}
+              <div className="shop-card-body">
+                <div className="cart-shop-header">
+                  <span className="cart-shop-dot" style={{ background: "var(--accent)" }} />
+                  {shop.name}
+                  <span className="category-chip" style={{ marginLeft: "auto" }}>
+                    {shop.category}
+                  </span>
+                </div>
+                {shopItems.map((item) => (
+                  <div className="product-row" key={item.productId}>
+                    <div className="product-thumb" />
+                    <div className="product-info">
+                      <div className="product-name">{item.name}</div>
+                      <div className="product-price">
+                        ₹{item.price} × {item.qty}
+                      </div>
                     </div>
-                  </div>
                   <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
                     <button
                       className="add-btn"
@@ -75,7 +83,8 @@ export default function CartPage() {
                     </button>
                   </div>
                 </div>
-              ))}
+                ))}
+              </div>
             </div>
           );
         })}

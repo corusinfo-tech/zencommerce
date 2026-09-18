@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import shopsData from "@/data/shops.json";
 import { distanceKm, RADIUS_BANDS, type LatLng } from "@/lib/geo";
+import { quoteDelivery } from "@/lib/pricing";
 import { useCart } from "@/lib/cart-context";
 
 // Mock delivery address (Kaloor, Kochi) — Phase 1 has no address picker yet.
@@ -11,6 +12,14 @@ import { useCart } from "@/lib/cart-context";
 const DELIVERY_ADDRESS: LatLng = { lat: 9.9857, lng: 76.2947 };
 
 type Shop = (typeof shopsData)[number];
+
+function coverClass(category: string) {
+  const key = category.toLowerCase();
+  if (key.includes("grocery")) return "cover-grocery";
+  if (key.includes("pharmacy")) return "cover-pharmacy";
+  if (key.includes("bakery")) return "cover-bakery";
+  return "cover-default";
+}
 
 export default function HomePage() {
   const [radiusKm, setRadiusKm] = useState<number>(RADIUS_BANDS.DEFAULT_KM);
@@ -22,7 +31,15 @@ export default function HomePage() {
         ...shop,
         distance: distanceKm(DELIVERY_ADDRESS, { lat: shop.lat, lng: shop.lng }),
       }))
+      // Filter to the selected radius BEFORE computing a delivery quote —
+      // quoteDelivery() intentionally throws for anything beyond the platform's
+      // 5km max (principles.md §3.1), so it must never be called on a shop
+      // that hasn't already passed the radius check.
       .filter((shop) => shop.distance <= radiusKm)
+      .map((shop) => ({
+        ...shop,
+        eta: quoteDelivery(DELIVERY_ADDRESS, [{ lat: shop.lat, lng: shop.lng }]),
+      }))
       .sort((a, b) => a.distance - b.distance);
   }, [radiusKm]);
 
@@ -59,39 +76,49 @@ export default function HomePage() {
         )}
 
         {shopsWithDistance.map((shop) => (
-          <div className="shop-card" key={shop.id}>
-            <div className="shop-card-head">
-              <div>
-                <div className="shop-name">{shop.name}</div>
-                <div className="shop-meta">
-                  {shop.category} · {shop.distance.toFixed(1)} km away
-                </div>
-              </div>
-              {!shop.open && <span className="closed-badge">Closed</span>}
+          <div className={`shop-card ${!shop.open ? "is-closed" : ""}`} key={shop.id}>
+            <div className={`shop-cover ${coverClass(shop.category)}`}>
+              <span className="shop-cover-name">{shop.name}</span>
+              {shop.open ? (
+                <span className="eta-badge">⏱ ~{shop.eta.etaMinutes} min</span>
+              ) : (
+                <span className="closed-ribbon">Closed</span>
+              )}
             </div>
 
-            {shop.products.map((p) => (
-              <div className="product-row" key={p.id}>
-                <div>
-                  <div className="product-name">{p.name}</div>
-                  <div className="product-price">₹{p.price}</div>
+            <div className="shop-card-body">
+              <div className="shop-card-head">
+                <div className="shop-meta">
+                  <span className="category-chip">{shop.category}</span>
+                  <span>{shop.distance.toFixed(1)} km away</span>
                 </div>
-                <button
-                  className="add-btn"
-                  disabled={!shop.open}
-                  onClick={() =>
-                    addItem({
-                      shopId: shop.id,
-                      productId: p.id,
-                      name: p.name,
-                      price: p.price,
-                    })
-                  }
-                >
-                  Add
-                </button>
+                {!shop.open && <span className="closed-badge">Unavailable</span>}
               </div>
-            ))}
+
+              {shop.products.map((p) => (
+                <div className="product-row" key={p.id}>
+                  <div className="product-thumb" />
+                  <div className="product-info">
+                    <div className="product-name">{p.name}</div>
+                    <div className="product-price">₹{p.price}</div>
+                  </div>
+                  <button
+                    className="add-btn"
+                    disabled={!shop.open}
+                    onClick={() =>
+                      addItem({
+                        shopId: shop.id,
+                        productId: p.id,
+                        name: p.name,
+                        price: p.price,
+                      })
+                    }
+                  >
+                    Add
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
