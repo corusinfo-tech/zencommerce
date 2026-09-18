@@ -1,0 +1,50 @@
+[
+  {
+    "id": "shop-1",
+    "name": "Kaloor Grocers",
+    "category": "Grocery",
+    "lat": 9.9857,
+    "lng": 76.2947,
+    "open": true,
+    "products": [
+      { "id": "p1", "name": "Rice 5kg", "price": 320 },
+      { "id": "p2", "name": "Toor Dal 1kg", "price": 140 },
+      { "id": "p3", "name": "Sunflower Oil 1L", "price": 165 }
+    ]
+  },
+  {
+    "id": "shop-2",
+    "name": "Kochi Fresh Pharmacy",
+    "category": "Pharmacy",
+    "lat": 9.9901,
+    "lng": 76.2989,
+    "open": true,
+    "products": [
+      { "id": "p4", "name": "Paracetamol Strip", "price": 25 },
+      { "id": "p5", "name": "Hand Sanitizer 200ml", "price": 90 }
+    ]
+  },
+  {
+    "id": "shop-3",
+    "name": "MG Road Bakery",
+    "category": "Bakery",
+    "lat": 9.9312,
+    "lng": 76.2673,
+    "open": true,
+    "products": [
+      { "id": "p6", "name": "Brown Bread", "price": 55 },
+      { "id": "p7", "name": "Chocolate Cake 500g", "price": 350 }
+    ]
+  },
+  {
+    "id": "shop-4",
+    "name": "Edappally General Store",
+    "category": "Grocery",
+    "lat": 10.0261,
+    "lng": 76.3086,
+    "open": false,
+    "products": [
+      { "id": "p8", "name": "Wheat Flour 5kg", "price": 210 }
+    ]
+  }
+]
